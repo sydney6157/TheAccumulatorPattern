@@ -7,9 +7,10 @@ A subsequent module lets you practice the ACCUMULATOR pattern in another classic
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Sydney Larson.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
+import math
 
 # ----------------------------------------------------------------------
 # Students: As you work each of these problems, ask yourself:
@@ -55,17 +56,27 @@ def run_test_sum_more_cosines():
     print('--------------------------------------------------')
     print('Testing the   sum_more_cosines   function:')
     print('--------------------------------------------------')
-
+    # ------------------------------------------------------------------
+    # TO DO: 2 (continued).
+    # Below this comment, add 2 more test cases of your own choosing.
+    # ------------------------------------------------------------------
     # Test 1:
     expected = 0.13416  # This is APPROXIMATELY the correct answer.
     answer = sum_more_cosines(0, 3)
     print('Test 1 expected:', expected, '(approximately)')
     print('       actual:  ', answer)
 
-    # ------------------------------------------------------------------
-    # TO DO: 2 (continued).
-    # Below this comment, add 2 more test cases of your own choosing.
-    # ------------------------------------------------------------------
+    # Test 2:
+    expected = 0.02082  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(-4, 1)
+    print('Test 2 expected:', expected, '(approximately)')
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = -0.3953  # This is APPROXIMATELY the correct answer.
+    answer = sum_more_cosines(-2, 4)
+    print('Test 3 expected:', expected, '(approximately)')
+    print('       actual:  ', answer)
 
 
 def sum_more_cosines(m, n):
@@ -82,6 +93,18 @@ def sum_more_cosines(m, n):
             cos(-4) + cos(-3) + cos(-2) + cos(-1) + cos(0) + cos(1)
          which is approximately 0.02082.
     """
+    k = 0
+    sumof = 0
+    if m  > 0:
+        for x in range(n+1):
+            sumof = sumof + (math.cos( k + m ))
+            k += 1
+    elif m <= 0:
+        for x in range ((n-m)+1):
+            sumof = sumof + (math.cos ( k + m ))
+            k += 1
+    return sumof
+
     # ------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
@@ -111,16 +134,40 @@ def run_test_count_sines_from():
     print('Testing the   count_sines_from   function:')
     print('--------------------------------------------------')
 
+    # ------------------------------------------------------------------
+    # TO DO: 4 (continued).
+    # Below this comment, add 5 more test cases of your own choosing.
+    # ------------------------------------------------------------------
+
     # Test 1:
     expected = 5
     answer = count_sines_from(3, 9)
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
-    # ------------------------------------------------------------------
-    # TO DO: 4 (continued).
-    # Below this comment, add 5 more test cases of your own choosing.
-    # ------------------------------------------------------------------
+    # Test 2:
+    expected = 8
+    answer = count_sines_from(2, 12)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = 3
+    answer = count_sines_from(7, 11)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 4:
+    expected = 40
+    answer = count_sines_from(6, 66)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 5:
+    expected = 21
+    answer = count_sines_from(13, 45)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
 
 
 def count_sines_from(m, n):
@@ -142,6 +189,19 @@ def count_sines_from(m, n):
       -- count_sines_from(7, 7)  returns  0
       -- count_sines_from(9, 9)  returns  1
     """
+    k = 0
+    numofints = 0
+    for x in range (n+1):
+        if k < m:
+            k += 1
+        elif k >= m and k <= n:
+            if math.sin(k) < 0.5:
+                numofints += 1
+                k += 1
+            else:
+                k += 1
+    return numofints
+
     # ------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
@@ -178,6 +238,36 @@ def run_test_count_sines_vs_cosines():
     # Below this comment, add 5 more test cases of your own choosing.
     # ------------------------------------------------------------------
 
+    # Test 2:
+    expected = 6
+    answer = count_sines_vs_cosines(5)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = 12
+    answer = count_sines_vs_cosines(11)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 4:
+    expected = 67
+    answer = count_sines_vs_cosines(66)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 5:
+    expected = 12
+    answer = count_sines_vs_cosines(13)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 6:
+    expected = 125
+    answer = count_sines_vs_cosines(123)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
+
 
 def count_sines_vs_cosines(m):
     """
@@ -211,6 +301,16 @@ def count_sines_vs_cosines(m):
     #   you must NOT use the 2 or 3-parameter versions
     #   of the RANGE expression, if you happen to know them.
     # ------------------------------------------------------------------
+    k = -m
+    numofints = 0
+    num=(2*m)+1
+    for x in range (num):
+        if math.sin(k) > math.cos(k):
+            numofints += 1
+            k += 1
+        else:
+            k += 1
+    return numofints
 
 
 # ----------------------------------------------------------------------
