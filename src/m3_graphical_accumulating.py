@@ -168,14 +168,11 @@ def draw_lines(n, point, window):
       :type point: rg.Point
       :type window: rg.RoseWindow
     """
-    num = 201/n
-    k = 1
-    change = num*k
+    endpoint = rg.Point(point.x+100,point.y-100)
+    num = 201/(n-1)
     for x in range (n):
-        endpoint = rg.Point(point.x+100,point.y-change)
-        change = num*k
-        k += 1
         line = rg.Line(point,endpoint)
+        endpoint = rg.Point(point.x+100,endpoint.y+num)
         line.attach_to(window)
     window.render()
     # ------------------------------------------------------------------
