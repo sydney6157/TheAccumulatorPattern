@@ -9,7 +9,7 @@ Additionally, it emphasizes that you must
 before you can implement a solution to the problem in Python. 
   
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Sydney Larson.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
@@ -97,6 +97,18 @@ def draw_squares_from_circle(n, circle, window):
       :type circle: rg.Circle
       :type window: rg.RoseWindow
     """
+
+    radius = circle.radius
+    cent = rg.Point(circle.center.x,circle.center.y)
+
+    for x in range(n):
+        square = rg.Square(cent,radius*2)
+        cent = rg.Point(square.center.x+radius,square.center.y+radius)
+        circle.attach_to(window)
+        square.attach_to(window)
+
+
+    window.render()
     # ------------------------------------------------------------------
     # TODO: 2. Implement and test this function.
     #          Tests have been written for you (above).
@@ -120,6 +132,26 @@ def run_test_draw_circles_from_rectangle():
     print('Testing the  draw_circles_from_rectangle  function:')
     print('  See the graphics windows that pop up.')
     print('--------------------------------------------------')
+
+    title = 'Tests 1 and 2 of DRAW_CIRCLES_FROM_RECTANGLE: '
+    title = title + ' 8 blue in row, 3 in column; then 4 green in row, ' \
+                    '5 in column'
+    window1 = rg.RoseWindow(720, 500, title)
+
+    # Test 1:
+    rectangle = rg.Rectangle(rg.Point(400,250),rg.Point(440,325))
+    rectangle.fill_color = 'green'
+    rectangle.outline_color = 'black'
+    rectangle.outline_thickness = 5
+    draw_circles_from_rectangle(5,4,rectangle,window1)
+
+    # Test 2:
+    rectangle2 = rg.Rectangle(rg.Point(600,400),rg.Point(500,450))
+    rectangle2.fill_color = 'blue'
+    rectangle2.outline_color = 'red'
+    rectangle2.outline_thickness = 3
+    draw_circles_from_rectangle(3,8,rectangle2,window1)
+    window1.close_on_mouse_click()
 
     # ------------------------------------------------------------------
     # TODO: 3. Implement this TEST function.
@@ -175,6 +207,28 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
       :type rectangle: rg.Rectangle
       :type window: rg.RoseWindow
     """
+
+    radius1 = rectangle.get_width()//2
+    radius2 = rectangle.get_height()//2
+    reccent = rectangle.get_center()
+    cent = rg.Point(reccent.x, reccent.y - radius2-radius1)
+    cent2 = rg.Point(reccent.x-radius1-radius2, reccent.y)
+
+    for x in range(m):
+        circle1 = rg.Circle(cent,radius1)
+        cent = rg.Point(cent.x, cent.y - radius1*2)
+        circle1.outline_color = rectangle.outline_color
+        rectangle.attach_to(window)
+        circle1.attach_to(window)
+
+
+    for k in range(n):
+        circle2 = rg.Circle(cent2, radius2)
+        cent2 = rg.Point(cent2.x - radius2*2, cent2.y)
+        circle2.fill_color = rectangle.fill_color
+        circle2.attach_to(window)
+
+    window.render()
     # ------------------------------------------------------------------
     # TODO: 4. Implement and test this function.
     #          Tests have been written for you (above).
@@ -267,6 +321,31 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type n: int
       :type window: rg.RoseWindow
       """
+    reccent1 = rectangle1.get_center()
+    start = reccent1
+    reccent2 = rectangle2.get_center()
+    end = reccent2
+    reccor = rectangle1.get_width()
+    disx = reccor//2
+    recheight = rectangle1.get_height()
+    disy = recheight//2
+
+    for x in range(n):
+        line = rg.Line(start, end)
+        line.thickness = 5
+        start.x = start.x - disx
+        start.y = start.y + disy
+        end.x = end.x - disx
+        end.y = end.y + disy
+        if x % 2 == 1:
+            line.color = rectangle2.outline_color
+        else:
+            line.color = rectangle1.outline_color
+        rectangle1.attach_to(window)
+        rectangle2.attach_to(window)
+        line.attach_to(window)
+
+    window.render()
     # ------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #          Tests have been written for you (above).
