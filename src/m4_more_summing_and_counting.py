@@ -12,7 +12,7 @@ in its "in graphics" form:
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
+         their colleagues and Sydney Larson.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
@@ -90,7 +90,7 @@ def run_test_sum_from():
     print('       actual (from my code):  ', answer_from_my_code)
 
 # ----------------------------------------------------------------------
-# TODO: 2.
+# DONE: 2.
 #   When you have READ the above  run_test_sum_from  function,
 #   asking questions as needed, and you feel that you (mostly, at least)
 #   understand it, and you feel that you understand from the example:
@@ -113,6 +113,13 @@ def sum_from(m, n):
     Example:
         sum_from(6, 9) returns 6 + 7 + 8 + 9, that is, 30.
     """
+    sumofints = 0
+    for x in range(n+1):
+        if x < m:
+            sumofints = sumofints
+        elif x >=m and x <= n:
+            sumofints = sumofints + x
+    return sumofints
     # ------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #          Tests have been written for you (above).
@@ -172,6 +179,15 @@ def factorial(n):
         factorial(5) returns 5 x 4 x 3 x 2 x 1, that is, 120.
         factorial(0) returns 1 (by definition).
     """
+    fact = 1
+    for x in range(n+1):
+        if x == 0 and n == 0:
+            fact = fact
+        elif x == 0 and n > 0:
+            fact = fact
+        else:
+            fact = fact * x
+    return fact
     # ------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
@@ -218,6 +234,36 @@ def run_test_count_cosines_from():
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
+    # Test 2:
+    expected = 3
+    answer = count_cosines_from(2, 7, 0.14)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = 2
+    answer = count_cosines_from(9, 15, 0.67)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 4:
+    expected = 2
+    answer = count_cosines_from(1, 6, 0.46)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 5:
+    expected = 1
+    answer = count_cosines_from(5, 6, 0.76)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 6:
+    expected = 0
+    answer = count_cosines_from(13, 17, 0.98)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
+
     # ------------------------------------------------------------------
     # TO DO: 6 (continued).
     # Below this comment, add 5 more test cases of your own choosing.
@@ -243,6 +289,15 @@ def count_cosines_from(m, n, x):
       -- count_cosines_from(3, 9, 0.27)  returns  3
       -- count_cosines_from(4, 8, -0.5)  returns  4
     """
+    numofints= 0
+    for k in range(n+1):
+        if k < m:
+            numofints = numofints
+        elif k >=m and k <= n:
+            if math.cos(k) > x:
+                numofints +=1
+    return numofints
+
     # ------------------------------------------------------------------
     # TODO: 7. Implement and test this function.
     #   Note that you should write its TEST function first (above).
@@ -272,6 +327,18 @@ def run_test_sum_unit_fractions_from():
     print('Test 1 expected:', expected, '(approximately)')
     print('       actual:  ', answer)
 
+    # Test 2:
+    expected = 1.717857
+    answer = sum_unit_fractions_from(2, 8)
+    print('Test 2 expected:', expected, '(approximately)')
+    print('       actual:  ', answer)
+
+    # Test 3:
+    expected = 0.730134
+    answer = sum_unit_fractions_from(7, 13)
+    print('Test 3 expected:', expected, '(approximately)')
+    print('       actual:  ', answer)
+
     # ------------------------------------------------------------------
     # TO DO: 8 (continued).
     # Below this comment, add 2 more test cases of your own choosing.
@@ -290,6 +357,13 @@ def sum_unit_fractions_from(m, n):
          which is about 0.545635
       -- sum_unit_fractions_from(10, 9000)  returns about  6.853
     """
+    sumofints= 0
+    for k in range(n+1):
+        if k < m:
+            sumofints = sumofints
+        elif k >=m and k <= n:
+            sumofints = sumofints + (1/k)
+    return sumofints
     # ------------------------------------------------------------------
     # TODO: 9. Implement and test this function.
     #   Note that you should write its TEST function first (above).
